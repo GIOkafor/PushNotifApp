@@ -51,19 +51,22 @@ var app = {
 
         //Camera activity
         //there's a reason onclick is specified here instead of in html
-       document.getElementById("btnTakePhoto").onclick = function () {
-            navigator.camera.getPicture(function (imageUri) {
-                var lastPhotoContainer = document.getElementById("imageHolder");
+        document.getElementById("btnTakePhoto").onclick = function () {
+            console.log("button clicked... Capturing image");
+            navigator.camera.getPicture(cameraSuccess, cameraError);
+        }
 
-                alert("Camera App works");
+        //Camera functions
+        function cameraSuccess(imageData){
+            console.log("taking picture");
+            var myImage = document.getElementById(imageHolder);
+            myImage.innerHTML = "<img src='"+imageData+"'style='width:75%;'/>";
+            alert("picture taken successfully");
+        }
 
-                lastPhotoContainer.innerHTML = "<img src='" + imageUri + "' style='width: 75%;'/>";
-            }, onFail);
-        
-            function onFail(message) {
-                alert('Failed because: ' + message);
-            }
-        };
+        function cameraError (error) {
+            console.log("Picture wasn't taken because: " + error);
+        }
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
