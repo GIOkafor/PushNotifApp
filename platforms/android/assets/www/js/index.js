@@ -35,16 +35,35 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
 
+
+        //token id for specific device 
+        var myToken = '';
+
         //if pushbots installed register device
         if(PushbotsPlugin.isAndroid()){
             PushbotsPlugin.initializeAndroid('5644f582177959b2358b4567', '502518271580');
             //get device token
             PushbotsPlugin.getToken(function(token){
-                alert("Device token is: " + token);
-                console.log("Device token is: " + token);
-            });
-            
+                myToken = token;
+                alert("Device token is: " + myToken);
+            });   
         }
+
+        //Camera activity
+        //there's a reason onclick is specified here instead of in html
+       document.getElementById("btnTakePhoto").onclick = function () {
+            navigator.camera.getPicture(function (imageUri) {
+                var lastPhotoContainer = document.getElementById("imageHolder");
+
+                alert("Camera App works");
+
+                lastPhotoContainer.innerHTML = "<img src='" + imageUri + "' style='width: 75%;'/>";
+            }, onFail);
+        
+            function onFail(message) {
+                alert('Failed because: ' + message);
+            }
+        };
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -57,6 +76,8 @@ var app = {
 
         console.log('Received Event: ' + id);
     }
+
+    
 };
 
 app.initialize();
