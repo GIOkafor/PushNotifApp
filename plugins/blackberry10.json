@@ -1,0 +1,45 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {
+            "www/config.xml": {
+                "parents": {
+                    "/widget": [
+                        {
+                            "xml": "<feature name=\"Camera\" value=\"Camera\" />",
+                            "count": 1
+                        }
+                    ],
+                    "/widget/rim:permissions": [
+                        {
+                            "xml": "<rim:permit>access_shared</rim:permit>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<rim:permit>use_camera</rim:permit>",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "installed_plugins": {
+        "android.support.v4": {
+            "PACKAGE_NAME": "io.cordova.hellocordova"
+        },
+        "com.pushbots.push": {
+            "PACKAGE_NAME": "io.cordova.hellocordova"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "io.cordova.hellocordova"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "io.cordova.hellocordova"
+        }
+    },
+    "dependent_plugins": {}
+}
